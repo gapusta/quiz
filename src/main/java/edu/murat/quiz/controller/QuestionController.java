@@ -3,6 +3,7 @@ package edu.murat.quiz.controller;
 import edu.murat.quiz.dto.OptionDto;
 import edu.murat.quiz.dto.QuestionDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,4 +39,6 @@ public class QuestionController {
     public List<QuestionDto> getAll() {
         return allQuestions;
     }
+
+    @PostMapping
 }
