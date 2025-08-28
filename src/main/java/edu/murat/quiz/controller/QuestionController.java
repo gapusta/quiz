@@ -4,14 +4,16 @@ import edu.murat.quiz.dto.OptionDto;
 import edu.murat.quiz.dto.QuestionDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class QuestionController {
 
-    private final static List<QuestionDto> allQuestions = List.of(
+    private final static List<QuestionDto> allQuestions = new ArrayList<>(List.of(
         new QuestionDto(
                 "What's 2 + 2?",
                 List.of(
@@ -33,12 +35,15 @@ public class QuestionController {
                         new OptionDto("who #4 times", false)
                 )
         )
-    );
+    ));
 
     @GetMapping("/question")
     public List<QuestionDto> getAll() {
         return allQuestions;
     }
 
-    @PostMapping
+    @PostMapping("/question")
+    public QuestionDto create(@RequestBody QuestionDto newQuestion) {
+        allQuestions.add(newQuestion);
+       return newQuestion;}
 }
