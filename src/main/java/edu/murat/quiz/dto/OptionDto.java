@@ -13,7 +13,7 @@ public class OptionDto {
         return option;
     }
 
-    public Boolean getCorrect() {
+    public Boolean getIsCorrect() {
         return isCorrect;
     }
 }
