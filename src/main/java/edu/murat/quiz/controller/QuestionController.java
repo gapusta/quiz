@@ -45,5 +45,6 @@ public class QuestionController {
     @PostMapping("/question")
     public QuestionDto create(@RequestBody QuestionDto newQuestion) {
         allQuestions.add(newQuestion);
-       return newQuestion;}
+        return newQuestion;
+    }
 }
