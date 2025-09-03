@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 public class QuestionController {
 
-    private final AtomicLong sequence = new AtomicLong(0);
+    private final AtomicLong sequence = new AtomicLong(3);
 
     private final static List<QuestionDto> allQuestions = new ArrayList<>(List.of(
         new QuestionDto(
