@@ -3,6 +3,7 @@ package edu.murat.quiz.controller;
 import edu.murat.quiz.dto.OptionDto;
 import edu.murat.quiz.dto.QuestionDto;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class QuestionController {
         return allQuestions;
     }
     @PostMapping("/question")
-    public QuestionDto create(@RequestBody QuestionDto newQuestion) {
+    public QuestionDto create(@Valid @RequestBody QuestionDto newQuestion) {
         newQuestion.setId(sequence.incrementAndGet());
         allQuestions.add(newQuestion);
         return newQuestion;
@@ -54,4 +55,8 @@ public class QuestionController {
     public void delete(@PathVariable long id) {
         allQuestions.removeIf(question -> question.getId().equals(id));
     }
+  /*
+    public QuestionDto update(@PathVariable long id, @Valid  @RequestBody QuestionDto updatedQuestion) {
+        return allQuestions.stream().filter(question -> question.getId().equals(id)).findFirst().get();
+    }*/
 }

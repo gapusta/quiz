@@ -1,5 +1,8 @@
 package edu.murat.quiz.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Component;
 
 
@@ -7,7 +10,11 @@ import java.util.List;
 
 public class QuestionDto {
     private Long id;
+
+    @NotEmpty(message = "question should not be empty")
+    @NotBlank
     private String question;
+    @Size(min=2, message = "question should contain at lest 2 options")
     private List<OptionDto> options;
 
     public QuestionDto(Long id, String question, List<OptionDto> options) {
