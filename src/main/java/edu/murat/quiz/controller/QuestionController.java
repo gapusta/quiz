@@ -2,6 +2,7 @@ package edu.murat.quiz.controller;
 
 import edu.murat.quiz.dto.OptionDto;
 import edu.murat.quiz.dto.QuestionDto;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -55,8 +56,12 @@ public class QuestionController {
     public void delete(@PathVariable long id) {
         allQuestions.removeIf(question -> question.getId().equals(id));
     }
-  /*
-    public QuestionDto update(@PathVariable long id, @Valid  @RequestBody QuestionDto updatedQuestion) {
-        return allQuestions.stream().filter(question -> question.getId().equals(id)).findFirst().get();
-    }*/
+
+    @PutMapping("/{id}")
+    public QuestionDto update(@PathVariable long id, @Valid  @RequestBody QuestionDto updatedQuestion) throws ClassNotFoundException {
+        QuestionDto existingQuestion = allQuestions.stream().filter(question -> question.getId().equals(id)).findFirst().orElseThrow(ClassNotFoundException::new);
+        existingQuestion.setQuestion(updatedQuestion.getQuestion());
+        existingQuestion.setOptions(updatedQuestion.getOptions());
+        return updatedQuestion;
+    }
 }

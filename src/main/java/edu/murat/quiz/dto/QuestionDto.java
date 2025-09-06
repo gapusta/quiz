@@ -30,7 +30,15 @@ public class QuestionDto {
         return question;
     }
 
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
     public List<OptionDto> getOptions() {
         return options;
+    }
+
+    public void setOptions(List<OptionDto> options) {
+        this.options = options;
     }
 }
