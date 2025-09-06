@@ -57,6 +57,19 @@ public class QuestionController {
         allQuestions.removeIf(question -> question.getId().equals(id));
     }
 
+    @PatchMapping("/{id}/question")
+    public QuestionDto patchQuestion(@PathVariable long id, @Valid @RequestBody QuestionDto newQuestion) {
+        QuestionDto patchQuestion = allQuestions.stream().filter(question -> question.getId().equals(id)).findFirst().get();
+        String[] cases = {"question", "options"};
+        for (String field : cases) {
+            if (field.equals("question") && newQuestion.getQuestion() != null) {
+                patchQuestion.setQuestion(newQuestion.getQuestion());
+            } else if (field.equals("options") && newQuestion.getOptions() != null) {
+                patchQuestion.setOptions(newQuestion.getOptions());
+            }
+        }
+        return patchQuestion;
+    }
     @PutMapping("/{id}")
     public QuestionDto update(@PathVariable long id, @Valid  @RequestBody QuestionDto updatedQuestion) throws ClassNotFoundException {
         QuestionDto existingQuestion = allQuestions.stream().filter(question -> question.getId().equals(id)).findFirst().orElseThrow(ClassNotFoundException::new);
